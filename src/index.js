@@ -328,9 +328,11 @@ function graphqlHTTP(options: Options): Middleware {
         // Note: Information about the error itself will still be contained in
         // the resulting JSON payload.
         // http://facebook.github.io/graphql/#sec-Data
-        if (response.statusCode === 200 && result && !result.data) {
-          response.statusCode = 500;
-        }
+        // XXX(kkleidal): I don't believe this necessitates returning a 500.
+        // if (response.statusCode === 200 && result && !result.data) {
+        //   response.statusCode = 500;
+        // }
+
         // Format any encountered errors.
         if (result && result.errors) {
           (result: any).errors = result.errors.map(
